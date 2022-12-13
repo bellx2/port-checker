@@ -11,10 +11,17 @@ Open multiple port checker.
 | -n     | Count             | 1         |
 | -json  | Output JSON       | false     |
 
+## Build
+
+```bash
+go build
+GOOS=windows GOARCH=amd64 go build # for windows
+```
+
 ## Usage
 
 ```bash
-➜ go run main.go -h www.yahoo.co.jp -p 80 -n 10
+➜ portcheker -h www.yahoo.co.jp -p 80 -n 10
 Host: www.yahoo.co.jp
 80 : OPEN
 81 : CLOSE -  dial tcp 183.79.219.252:81: i/o timeout
@@ -23,7 +30,7 @@ Host: www.yahoo.co.jp
 84 : CLOSE -  dial tcp 183.79.219.252:84: i/o timeout
 ...
 
-➜ go run main.go -h www.yahoo.co.jp -p 80 -n 10 --json | jq
+➜ portcheker -h www.yahoo.co.jp -p 80 -n 10 --json | jq
 {
   "host": "www.yahoo.co.jp",
   "ports": [
@@ -41,11 +48,4 @@ Host: www.yahoo.co.jp
   ]
 }
 
-```
-
-## Build
-
-```bash
-go build
-GOOS=windows GOARCH=amd64 go build # for windows
 ```

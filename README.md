@@ -9,6 +9,7 @@ Open multiple port checker.
 | -h     | host              | localhost |
 | -p     | Start Port Number | 58000     |
 | -n     | Count             | 1         |
+| -json  | Output JSON       | false     |
 
 ## Usage
 
@@ -20,6 +21,26 @@ Host: www.yahoo.co.jp
 82 : CLOSE -  dial tcp 183.79.219.252:82: i/o timeout
 83 : CLOSE -  dial tcp 183.79.219.252:83: i/o timeout
 84 : CLOSE -  dial tcp 183.79.219.252:84: i/o timeout
+...
+
+➜ go run main.go -h www.yahoo.co.jp -p 80 -n 10 --json | jq
+{
+  "host": "www.yahoo.co.jp",
+  "ports": [
+    {
+      "port": "80",
+      "status": "OPEN",
+      "open": true
+    },
+    {
+      "port": "81",
+      "status": "CLOSED : dial tcp 182.22.25.252:81: i/o timeout",
+      "open": false
+    },
+    ...
+  ]
+}
+
 ```
 
 ## Build

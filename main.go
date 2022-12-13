@@ -7,17 +7,15 @@ import (
 	"time"
 )
 
-func raw_connect(host string, ports []string) {
-	for _, port := range ports {
-			timeout := time.Second
-			conn, err := net.DialTimeout("tcp", net.JoinHostPort(host, port), timeout)
-			if err != nil {
-					fmt.Println(port, ": CLOSE - ", err)
-			}
-			if conn != nil {
-					defer conn.Close()
-					fmt.Println(port, ": OPEN")
-			}
+func raw_connect(host string, port string) {
+	timeout := time.Second
+	conn, err := net.DialTimeout("tcp", net.JoinHostPort(host, port), timeout)
+	if err != nil {
+			fmt.Println(port, ": CLOSE - ", err)
+	}
+	if conn != nil {
+			defer conn.Close()
+			fmt.Println(port, ": OPEN")
 	}
 }
 
@@ -37,6 +35,6 @@ func main() {
 	fmt.Println("Host:", *host)
 	for i := *st; i < *st + *num; i++ {
 		port := fmt.Sprintf("%d", i)
-		raw_connect(*host, []string{port})
+		raw_connect(*host, port)
 	}
 }
